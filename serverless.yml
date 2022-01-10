@@ -1,0 +1,48 @@
+service: sample-sqs
+useDotenv: true
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: ap-southeast-1
+  timeout: 30
+  environment:
+    SQS_MY_FIRST_QUEUE_URL: { Ref: MyFirstQueue }
+resources:
+  Resources:
+    MyFirstQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: MyFirstQueue
+functions:
+  test:
+    handler: src/handlers/index.test
+    events:
+      - http:
+          path: /
+          method: get
+  mySQSHandler:
+    handler: src/handlers/sqs.compute
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - MyFirstQueue
+              - Arn
+plugins:
+  - serverless-webpack
+  - serverless-offline-sqs
+  - serverless-offline
+custom:
+  webpack:
+    includeModules: true
+  serverless-offline-sqs:
+    autoCreate: true
+    apiVersion: '2012-11-05'
+    endpoint: http://0.0.0.0:9324
+    region: ap-southeast-1
+    accessKeyId: root
+    secretAccessKey: root
+    skipCacheInvalidation: false
+  serverless-offline:
+    httpPort: 16000
+    lambdaPort: 16001
