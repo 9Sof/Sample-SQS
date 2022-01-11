@@ -1,3 +1,2 @@
-install java
-install aws cli 
-link: https://aws.amazon.com/th/cli/
+### install java
+### install aws cli (https://aws.amazon.com/th/cli/)
