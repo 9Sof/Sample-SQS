@@ -7,3 +7,13 @@
     ~ Default region name [None]: 
     ~ Default output format [None]:
 ```
+
+### Run Java
+```bash
+    $npm run elastincmq
+```
+
+### Run serverless-offline
+```bash
+    $npm run dev
+```
