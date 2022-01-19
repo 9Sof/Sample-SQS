@@ -8,12 +8,12 @@
     ~ Default output format [None]:
 ```
 
-### first step Run Java
+### Run Java
 ```bash
     $npm run elastincmq
 ```
 
-### second step Run serverless-offline
+### Run serverless-offline
 ```bash
     $npm run dev
 ```
